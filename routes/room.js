@@ -12,23 +12,38 @@ const Room = require('../models/room')(
 );
 
 /* GET room page. */
-router.get('/', function(req, res, next) {
-  res.json({message:"GET room"});
-});
+router.get('/', async (req, res, next) => {
+    try {
+        const rooms = await Room.findAll();
+        res.json({ rooms });
+    } catch (error) {
+        next(error);
+    }
+  });
 
+/* POST */
 router.post('/', async (req, res, next) => {
     const room = await Room.create({
-        name: "1"
+        name: '1'
     });
     res.json({message:"POST room"});
 });
 
-router.put('/', function(req, res, next) {
-  res.json({message:"PUT room"});
+/* PUT */
+router.put('/', async function(req, res, next) {
+    const id = 1;
+    const room = await Room.findByPk(id);
+    room.name = '1.1';
+    await room.save();
+    res.json({message:"DELETE room"});
 });
 
-router.delete('/', function(req, res, next) {
-  res.json({message:"DELETE room"});
-});
+  /* DELETE */
+  router.delete('/', async function(req, res, next) {
+    const id = 1;
+    const room = await Room.findByPk(id);
+    await room.destroy();
+    res.json({message:"DELETE room"});
+  });
 
 module.exports = router;

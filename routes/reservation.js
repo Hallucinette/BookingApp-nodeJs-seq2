@@ -12,29 +12,44 @@ const Reservation = require('../models/reservation')(
 );
 
 /* GET */
-router.get('/', function(req, res, next) {
-    res.json({message:"GET reservation"});
-  });
+router.get('/', async (req, res, next) => {
+  try {
+      const reservations = await Reservation.findAll();
+      res.json({ reservations });
+  } catch (error) {
+      next(error);
+  }
+});
 
 /* POST */
 router.post('/', async (req, res, next) => {
     const reservation = await Reservation.create({
         date: Date.now(),
         name: 'Jason',
-        note: 'rooftop please',
-        status: '1',
-        userId: '2',
-        spotId: '3',
-        roomId: '4'
+        note: 'sunset',
+        status: 1,
+        userId: 2,
+        spotId: 3,
+        roomId: 4
     });
     res.json({message:"POST reservation"});
 });
 
-router.put('/', function(req, res, next) {
-    res.json({message:"PUT reservation"});
+/* PUT */
+router.put('/', async function(req, res, next) {
+  const id = 7;
+  const reservation = await Reservation.findByPk(id);
+  reservation.note = 'sunset update';
+  await reservation.save();
+  res.json({message:"PUT reservation"});
   });
   
-  router.delete('/', function(req, res, next) {
+  /* DELETE */
+  router.delete('/', async function(req, res, next) {
+    const id = 6;
+    const reservation = await Reservation.findByPk(id);
+    reservation.note = 'sunset';
+    await reservation.destroy();
     res.json({message:"DELETE reservation"});
   });
 

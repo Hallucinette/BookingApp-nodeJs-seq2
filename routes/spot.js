@@ -13,10 +13,16 @@ const Spot = require('../models/spot')(
 );
 
 /* GET spot page. */
-router.get('/', function(req, res, next) {
-  res.json({message:"GET spot"});
+router.get('/', async (req, res, next) => {
+  try {
+      const spots = await Spot.findAll();
+      res.json({ spots });
+  } catch (error) {
+      next(error);
+  }
 });
 
+/* POST */
 router.post('/', async (req, res, next) => {
     const spot = await Spot.create({
         name: "1"
@@ -24,12 +30,26 @@ router.post('/', async (req, res, next) => {
     res.json({message:"POST spot"});
 });
 
-router.put('/', function(req, res, next) {
+/* PUT */
+router.put('/', async function(req, res, next) {
+  const id = 1;
+  const spot = await Spot.findByPk(id);
+  spot.name = "1";
+  await spot.save();
   res.json({message:"PUT spot"});
 });
 
-router.delete('/', function(req, res, next) {
-  res.json({message:"DELETE spot"});
-});
+  /* DELETE */
+  router.delete('/', async function(req, res, next) {
+    const id = 1;
+    const spot = await Spot.findByPk(id);
+    await spot.destroy();
+    await User.destroy({
+      where: {
+        id: id
+      },
+    });
+    res.json({message:"DELETE spot"});
+  });
 
 module.exports = router;
