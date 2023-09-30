@@ -11,9 +11,14 @@ const User = require('../models/user')(
     sequelize, DataTypes
 );
 
-/* GET user page. */
+/* GET users. */
 router.get('/', async (req, res, next) => {
     try {
+        const userRole = req.user.role;
+        console.log(userRole);
+        const isAdmin = (userRole === 'admin');
+        console.log(isAdmin);
+        if (!isAdmin) return res.status(403).json({ error: 'Accès interdit. Vous devez avoir le rôle admin' });
         const users = await User.findAll();
         res.json({ users });
     } catch (error) {
