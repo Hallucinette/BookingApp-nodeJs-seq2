@@ -28,7 +28,7 @@ NodeJS CRUD restaurant reservation app
 
 ## 🗺️ Database Schema 
 We agreed to all use the other team's database schema to make the course easier
-![Database Schema Booking restaurant](https://github.com/Hallucinette/BookingApp-nodeJs-seq2/ImageReadme/SchemaReservation)
+![Database Schema Booking restaurant](https://github.com/Hallucinette/BookingApp-nodeJs-seq2/ImageReadme/Postman.png)
 
 ## 🔗 Postman screenshots
-![Postman ScreenShot](https://github.com/Hallucinette/BookingApp-nodeJs-seq2/ImageReadme/Postman)
+![Postman ScreenShot](https://github.com/Hallucinette/BookingApp-nodeJs-seq2/ImageReadme/SchemaReservation.png)
