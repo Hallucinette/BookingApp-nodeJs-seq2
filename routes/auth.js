@@ -51,7 +51,6 @@ router.post('/signin', async (req, res) => {
     if (!validPassword) return res.status(400).json({message: `Nom d'utilisateur ou mot de passe incorrect`});
 
     const payload = {
-        // 'Bearer ',
         id: user.id,
         email: req.body.email,
         role: user.role
@@ -61,7 +60,7 @@ router.post('/signin', async (req, res) => {
   const token = jwt.sign(payload, SECRET_KEY, { expiresIn: '1h' });
 //   const tokenAvecPrefixe = 'Bearer ' + token;
 //   res.json({message: tokenAvecPrefixe});
-  res.json({message: token});
+  res.json({token: token});
   console.log(user);
 });
 

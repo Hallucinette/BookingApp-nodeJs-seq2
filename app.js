@@ -14,6 +14,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+const cors = require('cors');
+app.use(cors({ origin: 'http://localhost:8000' }));
 
 const verifyJWT = (req, res, next) => {
   const  SECRET_KEY = "secretkey23456"; // A remplacer par la même clé secrète que dans la route signin
