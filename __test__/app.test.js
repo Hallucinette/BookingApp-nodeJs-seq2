@@ -130,6 +130,20 @@ describe('POST /auth/signin', () => {
     });
 });
 
+describe('Reservation entity', () => {
+  it('should return all the reservations', async () => {
+    expect.assertions(1);
+    try {
+      const reservations = await Reservation.findAll()
+      expect(reservations.length).toBeDefined()
+    } catch (e) {
+      console.log(e)
+      throw e
+    }
+  })
+  return 
+})
+
 // /* POST /auth/signup */
 // describe('POST /auth/signup', () => {
 //     it('should return a signup', async () => {
